@@ -1,4 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 .cdk-overlay-container{
-    z-index: 20000}
+    z-index: 20000
+}
+
+* {
+    font-family: Futura PT !important
+}
+
+.mat-datepicker-content .mat-calendar {
+    width: 260px !important;
+    height: 320px !important;
+}

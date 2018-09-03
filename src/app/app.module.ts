@@ -14,10 +14,39 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { ListComponent } from './list/list.component';
+import { AddComponent } from './add/add.component';
+import { EditComponent } from './edit/edit.component';
+import { RouterModule, Routes } from '@angular/router';
+import { SafePipe } from './safe.pipe';
+
+const appRoutes: Routes = [
+  {
+    path: 'list',
+    component: ListComponent
+  },
+  {
+    path: 'add',
+    component: AddComponent
+  },
+  {
+    path: 'edit/:id',
+    component: EditComponent
+  },
+  { path: '',
+    redirectTo: '/list',
+    pathMatch: 'full'
+  }
+]
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ListComponent,
+    AddComponent,
+    EditComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
@@ -25,6 +54,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatProgressBarModule,
     BrowserAnimationsModule,
     MatDatepickerModule,
+    AngularFireStorageModule,
     MatNativeDateModule,
     HttpModule,
     FormsModule,
@@ -32,7 +62,10 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatProgressSpinnerModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    RouterModule.forRoot(
+      appRoutes // <-- debugging purposes only
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

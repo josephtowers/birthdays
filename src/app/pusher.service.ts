@@ -25,7 +25,7 @@ export class PusherService {
     .subscribe(data => {});
   }
   add( obj ) {
-    this.http.post('http://localhost:3120/add', {'name' : obj.name, 'birthdate': obj.birthdate, 'address': obj.address})
+    this.http.post('http://localhost:3120/add', {'name' : obj.name, 'birthdate': obj.birthdate, 'address': obj.address, 'image': obj.image})
     .subscribe(data => {});
   }
 }

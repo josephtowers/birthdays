@@ -1,0 +1,75 @@
+<h5 style="margin-top: 90px; margin-left: 20px">Today's birthdays</h5>
+<div *ngIf="birthdaysToday == null">
+  <div class="d-flex justify-content-center align-items-center" style="height: 100px;">
+    <mat-progress-bar style="width: 50%" mode="indeterminate"></mat-progress-bar>
+  </div>
+</div>
+<div *ngIf="birthdaysToday != null && birthdaysToday.length < 1">
+  <div class="d-flex justify-content-center align-items-center" style="height: 100px;">
+    <h6>Looks like it's nobody's birthday today</h6>
+  </div>
+</div>
+<div *ngFor="let person of birthdaysToday" class="list-group list-group-flush">
+  <a data-toggle="modal" (click)="selectPerson(person)" data-target="#exampleModalCenter" style="cursor: pointer" class="list-group-item list-group-item-action d-flex align-items-center">
+    <div style="height: 40px; width: 40px; border-radius: 40px;  margin-right: 20px">
+      <img src="{{getPicture(person.image)}}" style="height: 100%; width: 100%;">
+    </div>
+    <div class="d-flex flex-column" style="font-size: 0.8em">
+      <span>{{person.name}}</span>
+      <span>Turning {{person.age - 1}} today!</span>
+    </div>
+  </a>
+</div>
+<div class="d-flex justify-content-between align-items-end">
+  <h5 style="margin-top: 30px; margin-left: 20px">All birthdays</h5>
+  <button style="font-size: 0.8em; margin-right: 15px; margin-bottom: .5rem" type="button" class="btn btn-light" routerLink="/add">+
+    ADD
+  </button>
+</div>
+<div *ngIf="birthdays == null">
+  <div class="d-flex justify-content-center align-items-center" style="height: 100px;">
+    <mat-progress-bar style="width: 50%" mode="indeterminate"></mat-progress-bar>
+  </div>
+</div>
+<div *ngIf="birthdays != null && birthdays.length < 1">
+  <div class="d-flex justify-content-center align-items-center" style="height: 100px;">
+    <h6>Nobody's been added yet</h6>
+  </div>
+</div>
+<div *ngFor="let person of birthdays" class="list-group list-group-flush">
+  <a data-toggle="modal" (click)="selectPerson(person)" data-target="#exampleModalCenter" style="cursor: pointer" class="list-group-item list-group-item-action d-flex align-items-center">
+    <div style="height: 40px; width: 40px; border-radius: 40px;  margin-right: 20px">
+      <img src="{{getPicture(person.image)}}" style="height: 100%; width: 100%;">
+    </div>
+    <div class="d-flex flex-column" style="font-size: 0.8em">
+      <span>{{person.name}}</span>
+      <span>Will turn {{person.age}} on {{person.birthdate}}, {{person.year}}</span>
+    </div>
+  </a>
+</div>
+<div class="modal fade" id="exampleModalCenter" tabindex="10" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Person details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+      <div class="modal-body">
+        <div class="d-flex">
+          <img src="../../assets/icon/{{selectedPerson.image}}.png" height="70px" style="margin: 0 10px 20px 0">
+          <div class="d-flex flex-column">
+            <span>{{selectedPerson.name}} is {{selectedPerson.age - 1}} years old</span>
+            <span>Born: {{selectedPerson.birthdate}}, {{selectedPerson.birthyear}}</span>
+            <span>Lives in: {{selectedPerson.address != '' ? selectedPerson.address : 'No address'}}</span>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center" style="margin-top: 15px">
+          <button type="button" data-dismiss="modal" routerLink="/edit/{{selectedPerson.id}}" class="btn btn-primary" style="margin-right: 10px">Edit</button>
+          <button type="button" id="modalClose" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

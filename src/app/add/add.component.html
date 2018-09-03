@@ -1,0 +1,52 @@
+<div class="d-flex flex-column justify-content-center align-items-center" style="margin-top: 90px; width: 100%">
+  <img src="../../assets/icon/{{selectedAvatar}}.png" height="80px" style="margin-bottom: 10px">
+         <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">
+    Change avatar
+  </button>
+  <br />
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" style="text-align: center">
+    <mat-form-field class="example-full-width" style="width: 80%">
+      <input matInput placeholder="Name" name="name" #name="ngModel" ngModel required type="text" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </mat-form-field>
+    <mat-form-field style="width: 80%">
+      <input matInput [max]="yesterday" [matDatepicker]="picker2" placeholder="Date of birth" name="birthdate" ngModel required id="exampleInputEmail2"
+        aria-describedby="emailHelp">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field style="width: 80%" class="example-full-width">
+      <input matInput placeholder="Address" name="address" ngModel type="text" id="exampleInputPassword1">
+    </mat-form-field>
+
+    <div class="d-flex justify-content-center align-items-center">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+  </form>
+  <button type="button" hidden id="modalClose" class="btn btn-secondary" data-dismiss="modal">Close</button>
+</div>
+<button hidden id="goHome" style="font-size: 0.8em; margin-right: 15px; margin-bottom: .5rem" type="button" class="btn btn-light"
+  routerLink="/list">+ ADD</button>
+<div class="modal fade" id="exampleModal" tabindex="10" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Select avatar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <div style="width: 100%" class="justify-content-center align-items-center">
+          <div class="d-inline-flex" *ngFor="let icon of icons">
+            <img (click)="select(icon)" [ngStyle]="getBackgroundColor(icon)" src="../../assets/icon/{{icon}}.png" height="40px">
+          </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <button type="button" id="modalClose" class="btn btn-primary" data-dismiss="modal" style="margin-top: 10px">Accept</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
